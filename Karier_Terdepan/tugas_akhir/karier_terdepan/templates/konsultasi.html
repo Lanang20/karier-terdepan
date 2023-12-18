@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block title %}Konsultasi | Karier Terdepan{% endblock %}
+{% block content %}
+{% load static %}
+    <!-- ================ Konsultasi ================= -->
+    <div class="tes">
+        <div class="cardTes">
+            <div class="cardHeader">
+                <h1 class="mb-3">Konsultasi</h1>
+                <P class="col-md-8 text-center mb-2">Klik tombol di bawah ini untuk memulai konsultasi via WhatsApp dengan tim ahli kami. 
+                    Kami siap membantu menjawab pertanyaan seputar pilihan jurusan, serta memberikan saran yang personal sesuai minat Anda.</P>
+                <img src="{% static 'images/chat.svg' %}" alt="">
+                <div class="col-12">
+                    <a onclick="whatsApp()" class="btn btn-primary btn-mulai btn-sm px-4 me-md-2">
+                        <ion-icon style="width: 22px; height: 22px; vertical-align: middle;" name="logo-whatsapp">
+                        </ion-icon><span style="padding: 0 4px; vertical-align: middle;">WhatsApp</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function whatsApp() {
+            // Nomor WhatsApp yang akan dituju
+            var nomor = "6285702386691";
+
+            // Buat URL WhatsApp
+            var url = "https://api.whatsapp.com/send?phone=" + nomor;
+
+            // Buka URL WhatsApp di browser
+            window.open(url);
+        }
+    </script>
+{% endblock %}

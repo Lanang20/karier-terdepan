@@ -1,0 +1,69 @@
+{% extends 'base.html' %}
+{% block title %}Hasil Tes | Karier Terdepan{% endblock %}
+{% block content %}
+{% load static %}
+<!-- Tampilkan hasil penjurusan atau pesan kesalahan jika tidak ada hasil -->
+<div class="hasil_tes">
+    <div class="cardHasil_tes">
+        <div class="cardHeader">
+            <h1>Hasil Tes</h1>
+            {% if aspek_terpilih %}
+                {% if aspek_terpilih.id == 1 %}
+                    <img src="{% static 'images/pelaksana.svg' %}" alt="">
+                {% elif aspek_terpilih.id == 2 %}
+                    <img src="{% static 'images/peneliti.svg' %}" alt="">
+                {% elif aspek_terpilih.id == 3 %}
+                    <img src="{% static 'images/kreatif.svg' %}" alt="">
+                {% elif aspek_terpilih.id == 4 %}
+                    <img src="{% static 'images/social.svg' %}" alt="">
+                {% elif aspek_terpilih.id == 5 %}
+                    <img src="{% static 'images/komunikatif.svg' %}" alt="">
+                {% elif aspek_terpilih.id == 6 %}
+                    <img src="{% static 'images/administrasi.svg' %}" alt="">
+                {% endif %}
+                <p><strong>Aspek Minat Terpilih:</strong> {{ aspek_terpilih.nama }}</p>  
+                <!-- Tampilkan deskripsi aspek minat terpilih -->
+                <p><strong>Deskripsi Aspek Minat:</strong> {{ aspek_terpilih.deskripsi }}</p>
+                <!-- Tampilkan semua jurusan dengan aspek minat yang sama -->
+                <p><strong>Jurusan Terpilih:</strong></p>
+                <ul>
+                    {% for jurusan in jurusan_list %}
+                        <li>{{ jurusan.nama_jurusan }}<br>
+                            Deskripsi Jurusan: {{ jurusan.deskripsi }}
+                        </li>
+                    {% endfor %}
+                </ul>
+                <!-- Tampilkan tanggal tes -->
+                <p><strong>Tanggal Tes:</strong> {{ tes_terakhir.tanggal_tes }}</p>
+            {% else %}
+                <p>Belum ada tes yang dilakukan.</p>
+            {% endif %}
+            <h1>Tentang Tes Minat</h1>
+            <img src="{% static 'images/about_tesMinat.svg' %}" alt="">
+            <p>
+                Teori minat yang kami gunakan untuk melakukan tes minat adalah Teori Holland. 
+                Teori ini adalah hasil karya John Holland, seorang ahli psikologi terkemuka asal Amerika Serikat. 
+                John Holland mengembangkan teorinya dalam bukunya yang berjudul "Making Vocational Choices: A Theory of Vocational Personalities and Work Environments", 
+                yang merupakan perumusan teori kelima sejak karya tulis pertamanya pada tahun 1959.
+                Teori ini merupakan pendekatan yang paling banyak dipakai untuk membuat profil karir seseorang.
+                Menurut teori ini, seseorang dapat memiliki profil pilihan karir yang unik sesuai dengan minat dan kepribadiannya.
+                Teori Holland menyatakan bahwa terdapat enam lingkungan okupasional dan enam tipe kepribadian.
+                Aspek yang diukur dalam teori ini adalah keenam tipe dari hexagonal RIASEC, yang mencakup Realistic, Investigative, Artistic, Social, Enterprising, dan Conventional.
+                <br><br>
+                Dalam tes minat KarierTerdepan, kami mengukur aspek-aspek ini untuk memberikan gambaran yang jelas tentang minat dan kecenderungan Anda. 
+                Teori ini tidak hanya memungkinkan kami untuk memberikan rekomendasi jurusan kuliah yang sesuai, 
+                tetapi juga membantu Anda memahami lebih dalam tentang potensi karier yang sejalan dengan kepribadian dan minat pribadi Anda.
+                Kami percaya bahwa pemahaman mendalam terhadap minat dan kepribadian akan membimbing Anda dalam memilih jurusan kuliah 
+                yang sesuai dan membangun karir yang memuaskan.
+            </p>
+            <button class="btn btn-danger btn-md d-flex align-items-center px-4 me-md-2" id="cetakPdfButton">
+                <ion-icon style="width: 22px; height: 22px;" name="reader-outline"></ion-icon><span style="padding: 0 4px;">Cetak PDF</button>
+        </div>
+    </div>
+</div>
+<script>
+    document.getElementById('cetakPdfButton').addEventListener('click', function() {
+        window.open('{% url "generatePDF" %}', '_blank');
+    });
+</script>
+{% endblock %}

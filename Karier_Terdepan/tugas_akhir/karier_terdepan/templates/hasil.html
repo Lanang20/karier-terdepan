@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+{% load static %}
+    <!-- ================ Hasil Tes ================= -->
+    <div class="hasil_tes">
+        <div class="cardHasil_tes">
+            <div class="cardHeader">
+                <div class="table-responsive">
+                    <table class="table table-hover table-sm" id="myTable2">
+                        <thead>
+                            <tr>
+                                <th scope="col">No.</th>
+                                <th scope="col">Id Tes</th>
+                                <th scope="col" style="text-align: center;">Tanggal Tes</th>
+                                <th scope="col" style="text-align: center;">Minat</th>
+                                <th scope="col" style="text-align: center;">Rekomendasi Jurusan</th>
+                            </tr>
+                        </thead>
+                        <tbody class="table-group-divider">
+                            {% for data in hasil_tes %}
+                                <tr>
+                                    <th scope="row">{{ forloop.counter }}</th>
+                                    <td>{{ data.tes }}</td>
+                                    <td>{{ data.tanggal_tes }}</td>
+                                    <td>{{ data.minat }}</td>
+                                    <td>{{ data.jurusan }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

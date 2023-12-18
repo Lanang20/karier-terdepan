@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block title %}Tes Minat | Karier Terdepan{% endblock %}
+{% block content %}
+{% load static %}
+    <!-- ================ Mulai Tes ================= -->
+    <div class="mulai_tes">
+        <div class="cardMulai_tes">
+            <div class="cardHeader">
+                <div id="quiz">
+                    <h2 class="mb-3" id="question">{{ current_question.id }}. {{ current_question.soal }}</h2>
+                    <form id="quiz-form" method="post" action="{% url 'mulai_tes' %}">
+                        {% csrf_token %}
+                        <input type="hidden" name="id_soal" value="{{ current_question.id }}">
+                        <ul>
+                            <li>
+                                <input type="radio" name="answer" id="a" value="{{ current_question.minat_a.id }}">
+                                <label for="a" id="a_text">{{ current_question.pilihan_a }}</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="answer" id="b" value="{{ current_question.minat_b.id }}">
+                                <label for="b" id="b_text">{{ current_question.pilihan_b }}</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="answer" id="c" value="{{ current_question.minat_c.id }}">
+                                <label for="c" id="c_text">{{ current_question.pilihan_c }}</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="answer" id="d" value="{{ current_question.minat_d.id }}">
+                                <label for="d" id="d_text">{{ current_question.pilihan_d }}</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="answer" id="e" value="{{ current_question.minat_e.id }}">
+                                <label for="e" id="e_text">{{ current_question.pilihan_e }}</label>
+                            </li>
+                            <li>
+                                <input type="radio" name="answer" id="f" value="{{ current_question.minat_f.id }}">
+                                <label for="f" id="f_text">{{ current_question.pilihan_f }}</label>
+                            </li>
+                        </ul>
+                        <button type="submit" id="submit-btn">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        <!-- ================= Petunjuk Pengerjaan ================ -->
+        <div class="tutorial">
+            <div class="cardHeader">
+                <h2>Petunjuk Pengerjaan</h2>
+                <img src="{% static 'images/tutorial.svg' %}" style="width: 300px; height: 300px;" alt="">
+                <p>
+                    Pilih salah satu jawaban yang paling menggambarkan tentang diri Anda.
+                    Terdapat {{ total_soal }} pertanyaan, isilah sesuai dengan kepribadian Anda, agar rekomendasi jurusan yang kami berikan benar-benar akurat.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const form = document.getElementById("quiz-form");
+            const submitButton = document.getElementById("submit-btn");
+    
+            form.addEventListener("submit", function (event) {
+                // Periksa apakah ada jawaban yang dipilih
+                const selectedAnswer = document.querySelector('input[name="answer"]:checked');
+                
+                if (!selectedAnswer) {
+                    // Jika tidak ada jawaban yang dipilih, hentikan pengiriman formulir
+                    event.preventDefault();
+                    Swal.fire({
+                        title: "Pilih Jawaban!",
+                        iconColor: "#dc3545",
+                        width: 600,
+                        text: "Anda belum memilih jawaban!",
+                        icon: "warning",
+                        confirmButtonColor: "#3843D6"
+                    });
+                } else {
+                    // Jika jawaban dipilih, nonaktifkan tombol submit
+                    submitButton.disabled = true;
+                }
+            });
+        });
+    </script>
+{% endblock %}

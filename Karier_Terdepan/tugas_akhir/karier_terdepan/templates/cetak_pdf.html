@@ -1,0 +1,72 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" 
+        integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+    <link href="{% static 'css/dashboard.css' %}" rel="stylesheet">
+    <title>Hasil Tes | Karier Terdepan</title>
+</head>
+<body>
+    <!-- =============== Navigation ================ -->
+    <div class="pembungkus">
+        <div class="hasil_tes">
+            <div class="cardHasil_tes">
+                <div class="cardHeader">
+                    <h1 style="text-align: center;">Hasil Tes</h1>
+                    {% if jurusan %}
+                        {% if jurusan.minat.id == 1 %}
+                            <img src="{% static 'images/pelaksana.svg' %}" alt="">
+                        {% elif jurusan.minat.id == 2 %}
+                            <img src="{% static 'images/peneliti.svg' %}" alt="">
+                        {% elif jurusan.minat.id == 3 %}
+                            <img src="{% static 'images/kreatif.svg' %}" alt="">
+                        {% elif jurusan.minat.id == 4 %}
+                            <img src="{% static 'images/social.svg' %}" alt="">
+                        {% elif jurusan.minat.id == 5 %}
+                            <img src="{% static 'images/komunikatif.svg' %}" alt="">
+                        {% elif jurusan.minat.id == 6 %}
+                            <img src="{% static 'images/administrasi.svg' %}" alt="">
+                        {% endif %}
+                        <p><strong>Nama:</strong> {{ user.first_name }}</p>
+                        <p><strong>Aspek Minat Terpilih:</strong> {{ jurusan.minat.nama }}</p>  
+                        <!-- Tampilkan deskripsi aspek minat terpilih -->
+                        <p style="text-align: justify;"><strong>Deskripsi Aspek Minat:</strong> {{ jurusan.minat.deskripsi }}</p>
+                        <!-- Tampilkan semua jurusan dengan aspek minat yang sama -->
+                        <p style="text-align: justify;"><strong>Jurusan Terpilih:</strong> {{ jurusan.jurusan }}</p>
+                        <!-- Tampilkan tanggal tes -->
+                        <p><strong>Tanggal Tes:</strong> {{ jurusan.tes.tanggal_tes }}</p>
+                    {% else %}
+                        <p>Belum ada tes yang dilakukan.</p>
+                    {% endif %}
+                    <h1 style="text-align: center;">Tentang Tes Minat</h1>
+                    <img src="{% static 'images/about_tesMinat.svg' %}" alt="">
+                    <p style="text-align: justify;">
+                        Teori minat yang kami gunakan untuk melakukan tes minat adalah Teori Holland. 
+                        Teori ini adalah hasil karya John Holland, seorang ahli psikologi terkemuka asal Amerika Serikat. 
+                        John Holland mengembangkan teorinya dalam bukunya yang berjudul "Making Vocational Choices: A Theory of Vocational Personalities and Work Environments", 
+                        yang merupakan perumusan teori kelima sejak karya tulis pertamanya pada tahun 1959.
+                        Teori ini merupakan pendekatan yang paling banyak dipakai untuk membuat profil karir seseorang.
+                        Menurut teori ini, seseorang dapat memiliki profil pilihan karir yang unik sesuai dengan minat dan kepribadiannya.
+                        Teori Holland menyatakan bahwa terdapat enam lingkungan okupasional dan enam tipe kepribadian.
+                        Aspek yang diukur dalam teori ini adalah keenam tipe dari hexagonal RIASEC, yang mencakup Realistic, Investigative, Artistic, Social, Enterprising, dan Conventional.
+                        <br><br>
+                        Dalam tes minat KarierTerdepan, kami mengukur aspek-aspek ini untuk memberikan gambaran yang jelas tentang minat dan kecenderungan Anda. 
+                        Teori ini tidak hanya memungkinkan kami untuk memberikan rekomendasi jurusan kuliah yang sesuai, 
+                        tetapi juga membantu Anda memahami lebih dalam tentang potensi karier yang sejalan dengan kepribadian dan minat pribadi Anda.
+                        Kami percaya bahwa pemahaman mendalam terhadap minat dan kepribadian akan membimbing Anda dalam memilih jurusan kuliah 
+                        yang sesuai dan membangun karir yang memuaskan.
+                    </p>
+                    <a href="#">https://karier-terdepan.com</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js" 
+        integrity="sha384-geWF76RCwLtnZ8qwWowPQNguL3RmwHVBC9FhGdlKrxdiJJigb/j/68SIy3Te4Bkz" crossorigin="anonymous"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+</body>
+</html>
